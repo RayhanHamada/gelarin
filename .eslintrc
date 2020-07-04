@@ -1,0 +1,7 @@
+{
+  "extends": ["oclif", "oclif-typescript", "eslint-config-prettier"],
+  "rules": {
+    "object-curly-spacing": "off",
+    "no-extra-semi": 0
+  }
+}

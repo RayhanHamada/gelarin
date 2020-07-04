@@ -1,0 +1,6 @@
+planned commands
+
+- new : for creating new boilerplate
+- use : for using a particular boilerplate
+- rm  : for removing some particular boilerplate
+- list: listing all available boilerplate
