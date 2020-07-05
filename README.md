@@ -31,6 +31,7 @@ USAGE
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
 * [`gelarin init`](#gelarin-init)
 * [`gelarin new`](#gelarin-new)
+* [`gelarin use [PROJECTNAME]`](#gelarin-use-projectname)
 
 ## `gelarin help [COMMAND]`
 
@@ -76,4 +77,18 @@ OPTIONS
 ```
 
 _See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\new.ts)_
+
+## `gelarin use [PROJECTNAME]`
+
+Use a
+
+```
+USAGE
+  $ gelarin use [PROJECTNAME]
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\use.ts)_
 <!-- commandsstop -->
