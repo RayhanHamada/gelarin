@@ -51,7 +51,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0
 
 ## `gelarin init`
 
-describe the command here
+for initiating gelarin.json in home directory
 
 ```
 USAGE
