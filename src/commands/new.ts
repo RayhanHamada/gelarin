@@ -1,8 +1,10 @@
-import { Command, flags } from '@oclif/command';
-import inquirer from 'inquirer';
 import os from 'os';
 import path from 'path';
 import fs from 'fs';
+
+import { Command, flags } from '@oclif/command';
+import inquirer from 'inquirer';
+import prettier from 'prettier';
 
 export default class New extends Command {
   static description = 'command for saving new boilerplate repo';
@@ -85,9 +87,13 @@ export default class New extends Command {
     };
 
     await fs.promises
-      .writeFile(filePath, JSON.stringify(parsed), {
-        encoding: 'utf-8',
-      })
+      .writeFile(
+        filePath,
+        prettier.format(JSON.stringify(parsed), { parser: 'json-stringify' }),
+        {
+          encoding: 'utf-8',
+        }
+      )
       .then(() => {
         this.log(
           `\n Repo ${answer.boilerplateName} (${answer.repoLink}) is saved !`

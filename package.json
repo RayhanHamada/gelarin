@@ -13,6 +13,7 @@
     "@oclif/plugin-help": "^3",
     "cli-ux": "^5.4.9",
     "inquirer": "^7.3.0",
+    "prettier": "^2.0.5",
     "tslib": "^1"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
     "@types/inquirer": "^6.5.0",
     "@types/mocha": "^7.0.2",
     "@types/node": "^10",
+    "@types/prettier": "^2.0.1",
     "chai": "^4",
     "eslint": "^5.13",
     "eslint-config-oclif": "^3.1",
@@ -62,7 +64,8 @@
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif-dev readme && git add README.md",
+    "fmt": "./node_modules/.bin/prettier {src,test}/**/*.ts --write"
   },
   "types": "lib/index.d.ts"
 }
