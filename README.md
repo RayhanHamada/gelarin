@@ -29,7 +29,8 @@ USAGE
 # Commands
 <!-- commands -->
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
-* [`gelarin new [PROJECTNAME]`](#gelarin-new-projectname)
+* [`gelarin init`](#gelarin-init)
+* [`gelarin new`](#gelarin-new)
 
 ## `gelarin help [COMMAND]`
 
@@ -48,13 +49,27 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src\commands\help.ts)_
 
-## `gelarin new [PROJECTNAME]`
+## `gelarin init`
+
+describe the command here
+
+```
+USAGE
+  $ gelarin init
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src\commands\init.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\init.ts)_
+
+## `gelarin new`
 
 command for saving new boilerplate repo
 
 ```
 USAGE
-  $ gelarin new [PROJECTNAME]
+  $ gelarin new
 
 OPTIONS
   -h, --help  show CLI help

@@ -1,5 +1,6 @@
 planned commands
 
+- init: for creating json file containing all repo data (just for teh first time)
 - new : for creating new boilerplate
 - use : for using a particular boilerplate
 - rm  : for removing some particular boilerplate

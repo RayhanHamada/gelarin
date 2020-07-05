@@ -1,4 +1,8 @@
 import { Command, flags } from '@oclif/command';
+import inquirer from 'inquirer';
+import os from 'os';
+import path from 'path';
+import fs from 'fs';
 
 export default class New extends Command {
   static description = 'command for saving new boilerplate repo';
@@ -10,6 +14,84 @@ export default class New extends Command {
   static args = [];
 
   async run() {
-    return undefined;
+    const filePath = path.join(os.homedir(), 'gelarin.json');
+    const content = await fs.promises
+      .readFile(filePath, { encoding: 'utf-8' })
+      .catch(() => {
+        this.error('failed to reads gelarin.json');
+      });
+
+    let parsed: Record<string, any>;
+
+    try {
+      parsed = JSON.parse(content as string);
+    } catch (error) {
+      this.error(`failed parsing gelarin.json`);
+    }
+
+    const answer = await inquirer
+      .prompt([
+        {
+          type: 'input',
+          name: 'boilerplateName',
+          message: 'Enter boilerplate name :',
+          validate: input => {
+            const allowed = /^([\w][\w\d]*(-[A-Za-z0-9]+)*)?$/;
+
+            if (input === '') {
+              this.log('\nBoilerplate name cannot be empty');
+              return false;
+            }
+
+            if (!allowed.test(input)) {
+              this.log(
+                '\nonly support alphanumeric with optional dash (like boil-er-plate2)'
+              );
+              return false;
+            }
+            return true;
+          },
+        },
+        {
+          type: 'input',
+          name: 'description',
+          message: 'Enter Description',
+          default: 'My Awesome Boilerplate : ',
+        },
+        {
+          type: 'input',
+          name: 'repoLink',
+          message: 'Enter Repository link : ',
+          validate: input => {
+            if (input === '') {
+              this.log('\nLink cannot be empty');
+              return false;
+            }
+
+            return true;
+          },
+        },
+      ])
+      .catch(() => {
+        this.error('Error when questioning');
+      });
+
+    parsed = {
+      ...parsed,
+      [answer.boilerplateName]: {
+        description: answer.description,
+        repoLink: answer.repoLink,
+      },
+    };
+
+    await fs.promises
+      .writeFile(filePath, JSON.stringify(parsed), {
+        encoding: 'utf-8',
+      })
+      .then(() => {
+        this.log(
+          `\n Repo ${answer.boilerplateName} (${answer.repoLink}) is saved !`
+        );
+      });
   }
 }
