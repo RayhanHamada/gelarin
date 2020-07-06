@@ -7,7 +7,7 @@ import inquirer from 'inquirer';
 import prettier from 'prettier';
 
 export default class New extends Command {
-  static description = 'command for saving new boilerplate repo';
+  static description = 'Add new boilerplate repo to be saved';
 
   static flags = {
     help: flags.help({ char: 'h' }),
@@ -31,6 +31,9 @@ export default class New extends Command {
       this.error(`failed parsing gelarin.json`);
     }
 
+    /**
+     * get all answer here
+     */
     const answer = await inquirer
       .prompt([
         {
@@ -89,6 +92,9 @@ export default class New extends Command {
         this.error('Error when questioning');
       });
 
+    /**
+     * update parsed data
+     */
     parsed = {
       ...parsed,
       [answer.boilerplateName]: {
@@ -97,6 +103,9 @@ export default class New extends Command {
       },
     };
 
+    /**
+     * prettify and write to gelarin.json
+     */
     await fs.promises
       .writeFile(
         filePath,

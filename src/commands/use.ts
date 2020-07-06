@@ -12,7 +12,7 @@ export default class Use extends Command {
     help: flags.help({ char: 'h' }),
   };
 
-  static args = [{ name: 'projectName' }];
+  static args = [{ name: 'name' }];
 
   async run() {
     const { args } = this.parse(Use);
@@ -27,13 +27,7 @@ export default class Use extends Command {
         this.error(`failed reading ${filePath}`);
       });
 
-    let parsed: Record<string, any> = {};
-
-    try {
-      parsed = JSON.parse(content as string);
-    } catch (error) {
-      this.error(`failed parsing ${filePath}`);
-    }
+    const parsed: Record<string, any> = JSON.parse(content as string);
 
     const availableKeys = Object.keys(parsed);
 
@@ -41,9 +35,9 @@ export default class Use extends Command {
      * see if the args.projectName for use is specified,
      * if not then get list of choices
      */
-    if (args.projectName) {
-      if (availableKeys.includes(args.projectName)) {
-        const { repoLink } = parsed[args.projectName];
+    if (args.name) {
+      if (availableKeys.includes(args.name)) {
+        const { repoLink } = parsed[args.name];
 
         /**
          * exec git clone here
@@ -54,38 +48,41 @@ export default class Use extends Command {
             this.error(err);
           }
           this.log(out);
-          this.exit(0);
+          this.log(`finish cloning ${repoLink} !`);
         });
+      } else {
+        this.error(`Key ${args.name} not found`);
       }
-      this.log(`Key ${args.projectName} not found`);
-      this.exit(0);
-    }
-
-    await inquirer
-      .prompt([
-        {
-          type: 'list',
-          name: 'name',
-          message: 'Available boilerplate',
-          choices: availableKeys.map(key => ({
-            name: key,
-            value: key,
-          })),
-        },
-      ])
-      .then(ans => {
-        const { repoLink } = parsed[ans.name];
-        /**
-         * exec git clone here
-         * TODO: make git clone exec
-         */
-        exec(`git clone ${repoLink}`, (exc, out, err) => {
-          if (exc) {
-            this.error(err);
-          }
-          this.log(out);
-          this.exit(0);
+    } else {
+      /**
+       * list all available boilerplates here
+       */
+      await inquirer
+        .prompt([
+          {
+            type: 'list',
+            name: 'name',
+            message: 'Available boilerplate',
+            choices: availableKeys.map(key => ({
+              name: key,
+              value: key,
+            })),
+          },
+        ])
+        .then(ans => {
+          const { repoLink } = parsed[ans.name];
+          /**
+           * exec git clone here
+           * TODO: make git clone exec
+           */
+          exec(`git clone ${repoLink}`, (exc, out, err) => {
+            if (exc) {
+              this.error(err);
+            }
+            this.log(out);
+            this.log(`finish cloning ${repoLink} !`);
+          });
         });
-      });
+    }
   }
 }
