@@ -80,7 +80,7 @@ _See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0
 
 ## `gelarin use [PROJECTNAME]`
 
-Use a
+Use a boilerplate repo
 
 ```
 USAGE

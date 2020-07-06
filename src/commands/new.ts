@@ -72,6 +72,17 @@ export default class New extends Command {
 
             return true;
           },
+          transformer: input => {
+            /**
+             * check if repoLink suffixed with .git.
+             * if not, add it to the back of the repoLink
+             */
+            const gitSuffix = /.+\.git$/;
+
+            if (!gitSuffix.test(input)) return `${input}.git`;
+
+            return input;
+          },
         },
       ])
       .catch(() => {

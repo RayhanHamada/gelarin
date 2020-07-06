@@ -3,9 +3,10 @@ import fs from 'fs';
 import path from 'path';
 import os from 'os';
 import inquirer from 'inquirer';
+import { exec } from 'child_process';
 
 export default class Use extends Command {
-  static description = 'Use a';
+  static description = 'Use a boilerplate repo';
 
   static flags = {
     help: flags.help({ char: 'h' }),
@@ -48,8 +49,13 @@ export default class Use extends Command {
          * exec git clone here
          * TODO: make git clone exec
          */
-
-         this.exit(0);
+        exec(`git clone ${repoLink}`, (exc, out, err) => {
+          if (exc) {
+            this.error(err);
+          }
+          this.log(out);
+          this.exit(0);
+        });
       }
       this.log(`Key ${args.projectName} not found`);
       this.exit(0);
@@ -68,11 +74,18 @@ export default class Use extends Command {
         },
       ])
       .then(ans => {
-        const choosen = ans.name;
+        const { repoLink } = parsed[ans.name];
         /**
          * exec git clone here
          * TODO: make git clone exec
          */
+        exec(`git clone ${repoLink}`, (exc, out, err) => {
+          if (exc) {
+            this.error(err);
+          }
+          this.log(out);
+          this.exit(0);
+        });
       });
   }
 }
