@@ -13,10 +13,7 @@ export default class Rm extends Command {
   };
 
   static args = [{ name: 'name' }];
-
-  /**
-   * TODO: make implementation for rm command
-   */
+  
   async run() {
     const { args } = this.parse(Rm);
 

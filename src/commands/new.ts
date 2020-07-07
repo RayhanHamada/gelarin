@@ -6,6 +6,9 @@ import { Command, flags } from '@oclif/command';
 import inquirer from 'inquirer';
 import prettier from 'prettier';
 
+/**
+ * TODO: add args for instant repo add
+ */
 export default class New extends Command {
   static description = 'Add new boilerplate repo to be saved';
 

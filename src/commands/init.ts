@@ -3,6 +3,10 @@ import os from 'os';
 import path from 'path';
 import fs from 'fs';
 
+/**
+ * TODO: delete this file, because every command should automatically check for gelarin.json and created it if it not exists
+ * TODO: and make a util function that triggered on 'new' command
+ */
 export default class Init extends Command {
   static description =
     'Create gelarin.json file in home directory for saving boilerplate';

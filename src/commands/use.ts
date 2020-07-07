@@ -15,7 +15,7 @@ export default class Use extends Command {
   static args = [{ name: 'name' }];
 
   /**
-   * TODO: make "use" command accept directory name (default to ${cwd}/${repoName})
+   * TODO: make "use" command accept directory name (default to $CWD/$REPO_NAME like "myfolder/javascript-boilerplate")
    */
   async run() {
     const { args } = this.parse(Use);
@@ -44,7 +44,6 @@ export default class Use extends Command {
 
         /**
          * exec git clone here
-         * TODO: make git clone exec
          */
         exec(`git clone ${repoLink}`, (exc, out, err) => {
           if (exc) {
@@ -59,6 +58,7 @@ export default class Use extends Command {
     } else {
       /**
        * list all available boilerplates here
+       * TODO: also add repo description to the list.
        */
       await inquirer
         .prompt([
@@ -76,7 +76,6 @@ export default class Use extends Command {
           const { repoLink } = parsed[ans.name];
           /**
            * exec git clone here
-           * TODO: make git clone exec
            */
           exec(`git clone ${repoLink}`, (exc, out, err) => {
             if (exc) {
