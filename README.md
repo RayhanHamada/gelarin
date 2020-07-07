@@ -12,6 +12,9 @@ A package for saving boilerplates repo
 * [Usage](#usage)
 * [Commands](#commands)
 <!-- tocstop -->
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
 # Usage
 <!-- usage -->
 ```sh-session
@@ -26,8 +29,99 @@ USAGE
 ...
 ```
 <!-- usagestop -->
+```sh-session
+$ npm install -g gelarin
+$ gelarin COMMAND
+running command...
+$ gelarin (-v|--version|version)
+gelarin/0.0.0 win32-x64 node-v14.3.0
+$ gelarin --help [COMMAND]
+USAGE
+  $ gelarin COMMAND
+...
+```
+<!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`gelarin help [COMMAND]`](#gelarin-help-command)
+* [`gelarin init`](#gelarin-init)
+* [`gelarin new`](#gelarin-new)
+* [`gelarin rm [NAME]`](#gelarin-rm-name)
+* [`gelarin use [NAME]`](#gelarin-use-name)
+
+## `gelarin help [COMMAND]`
+
+display help for gelarin
+
+```
+USAGE
+  $ gelarin help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src\commands\help.ts)_
+
+## `gelarin init`
+
+Create gelarin.json file in home directory for saving boilerplate
+
+```
+USAGE
+  $ gelarin init
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src\commands\init.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\init.ts)_
+
+## `gelarin new`
+
+Add new boilerplate repo to be saved
+
+```
+USAGE
+  $ gelarin new
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\new.ts)_
+
+## `gelarin rm [NAME]`
+
+Remove saved boilerplate repo
+
+```
+USAGE
+  $ gelarin rm [NAME]
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\rm.ts)_
+
+## `gelarin use [NAME]`
+
+Use a boilerplate repo
+
+```
+USAGE
+  $ gelarin use [NAME]
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\use.ts)_
+<!-- commandsstop -->
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
 * [`gelarin init`](#gelarin-init)
 * [`gelarin new`](#gelarin-new)
