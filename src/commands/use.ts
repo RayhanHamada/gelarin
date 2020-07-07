@@ -14,6 +14,9 @@ export default class Use extends Command {
 
   static args = [{ name: 'name' }];
 
+  /**
+   * TODO: make "use" command accept directory name (default to ${cwd}/${repoName})
+   */
   async run() {
     const { args } = this.parse(Use);
     const filePath = path.join(os.homedir(), 'gelarin.json');

@@ -31,6 +31,7 @@ USAGE
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
 * [`gelarin init`](#gelarin-init)
 * [`gelarin new`](#gelarin-new)
+* [`gelarin rm [NAME]`](#gelarin-rm-name)
 * [`gelarin use [NAME]`](#gelarin-use-name)
 
 ## `gelarin help [COMMAND]`
@@ -52,7 +53,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0
 
 ## `gelarin init`
 
-initiate gelarin.json file in home directory
+Create gelarin.json file in home directory for saving boilerplate
 
 ```
 USAGE
@@ -77,6 +78,20 @@ OPTIONS
 ```
 
 _See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\new.ts)_
+
+## `gelarin rm [NAME]`
+
+Remove saved boilerplate repo
+
+```
+USAGE
+  $ gelarin rm [NAME]
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\rm.ts)_
 
 ## `gelarin use [NAME]`
 

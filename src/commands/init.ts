@@ -4,7 +4,8 @@ import path from 'path';
 import fs from 'fs';
 
 export default class Init extends Command {
-  static description = 'initiate gelarin.json file in home directory';
+  static description =
+    'Create gelarin.json file in home directory for saving boilerplate';
 
   static flags = {
     help: flags.help({ char: 'h' }),
