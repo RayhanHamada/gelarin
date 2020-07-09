@@ -7,13 +7,19 @@ import inquirer from 'inquirer';
 import { checkForGelarin } from '../util';
 
 export default class Rm extends Command {
-  static description = 'Remove saved boilerplate repo';
+  static description = 'Remove saved boilerplate repo (Optional)';
 
   static flags = {
     help: flags.help({ char: 'h' }),
   };
 
-  static args = [{ name: 'name' }];
+  static args = [
+    {
+      name: 'name',
+      required: false,
+      description: 'specify boilerplate name to be removed (optional)',
+    },
+  ];
 
   async run() {
     /**

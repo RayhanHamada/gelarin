@@ -14,7 +14,13 @@ export default class New extends Command {
     help: flags.help({ char: 'h' }),
   };
 
-  static args = [{ name: 'repoLink' }];
+  static args = [
+    {
+      name: 'repoLink',
+      required: false,
+      description: 'specify boilerplate repo link (optional)',
+    },
+  ];
 
   async run() {
     /**

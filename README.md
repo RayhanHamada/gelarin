@@ -22,7 +22,7 @@ $ npm install -g gelarin
 $ gelarin COMMAND
 running command...
 $ gelarin (-v|--version|version)
-gelarin/0.3.0 win32-x64 node-v14.3.0
+gelarin/0.4.0 win32-x64 node-v14.3.0
 $ gelarin --help [COMMAND]
 USAGE
   $ gelarin COMMAND
@@ -73,25 +73,31 @@ Add new boilerplate repo to be saved
 USAGE
   $ gelarin new [REPOLINK]
 
+ARGUMENTS
+  REPOLINK  specify boilerplate repo link (optional)
+
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.3.0/src\commands\new.ts)_
+_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.4.0/src\commands\new.ts)_
 
 ## `gelarin rm [NAME]`
 
-Remove saved boilerplate repo
+Remove saved boilerplate repo (Optional)
 
 ```
 USAGE
   $ gelarin rm [NAME]
 
+ARGUMENTS
+  NAME  specify boilerplate name to be removed (optional)
+
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.3.0/src\commands\rm.ts)_
+_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.4.0/src\commands\rm.ts)_
 
 ## `gelarin use [NAME]`
 
@@ -101,11 +107,14 @@ Use a boilerplate repo
 USAGE
   $ gelarin use [NAME]
 
+ARGUMENTS
+  NAME  specify boilerplate name to be used (optional)
+
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.3.0/src\commands\use.ts)_
+_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.4.0/src\commands\use.ts)_
 <!-- commandsstop -->
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
 * [`gelarin init`](#gelarin-init)

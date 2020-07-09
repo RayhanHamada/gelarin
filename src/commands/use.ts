@@ -13,7 +13,13 @@ export default class Use extends Command {
     help: flags.help({ char: 'h' }),
   };
 
-  static args = [{ name: 'name' }];
+  static args = [
+    {
+      name: 'name',
+      required: false,
+      description: 'specify boilerplate name to be used (optional)',
+    },
+  ];
 
   /**
    * TODO: make "use" command accept directory name (default to $CWD/$REPO_NAME like "myfolder/javascript-boilerplate")
