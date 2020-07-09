@@ -49,6 +49,13 @@ export default class Rm extends Command {
     const availableKeys = Object.keys(parsed);
 
     /**
+     * if there is no available boilerplates, just exit
+     */
+    if (availableKeys.length === 0) {
+      this.error('No available boilerplates found, please add some !');
+    }
+
+    /**
      * if the name of the boilerplate meant to be removed is specified as inline argument
      */
     const toRemove: string[] = [];

@@ -45,6 +45,13 @@ export default class Use extends Command {
     const availableKeys = Object.keys(parsed);
 
     /**
+     * if there is no available boilerplates, just exit
+     */
+    if (availableKeys.length === 0) {
+      this.error('No available boilerplates found, please add some !');
+    }
+
+    /**
      * see if the args.projectName for use is specified,
      * if not then get list of choices
      */
