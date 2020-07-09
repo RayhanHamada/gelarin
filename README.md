@@ -22,7 +22,7 @@ $ npm install -g gelarin
 $ gelarin COMMAND
 running command...
 $ gelarin (-v|--version|version)
-gelarin/0.4.0 win32-x64 node-v14.3.0
+gelarin/0.5.0 win32-x64 node-v14.3.0
 $ gelarin --help [COMMAND]
 USAGE
   $ gelarin COMMAND
@@ -46,7 +46,7 @@ USAGE
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
 * [`gelarin new [REPOLINK]`](#gelarin-new-repolink)
 * [`gelarin rm [NAME]`](#gelarin-rm-name)
-* [`gelarin use [NAME]`](#gelarin-use-name)
+* [`gelarin use [NAME] [CLONEPATH]`](#gelarin-use-name-clonepath)
 
 ## `gelarin help [COMMAND]`
 
@@ -80,7 +80,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.4.0/src\commands\new.ts)_
+_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.5.0/src\commands\new.ts)_
 
 ## `gelarin rm [NAME]`
 
@@ -97,24 +97,25 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.4.0/src\commands\rm.ts)_
+_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.5.0/src\commands\rm.ts)_
 
-## `gelarin use [NAME]`
+## `gelarin use [NAME] [CLONEPATH]`
 
 Use a boilerplate repo
 
 ```
 USAGE
-  $ gelarin use [NAME]
+  $ gelarin use [NAME] [CLONEPATH]
 
 ARGUMENTS
-  NAME  specify boilerplate name to be used (optional)
+  NAME       specify boilerplate name to be used (optional)
+  CLONEPATH  specify the directory this boilerplate should be cloned (Optional, default to ".")
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.4.0/src\commands\use.ts)_
+_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.5.0/src\commands\use.ts)_
 <!-- commandsstop -->
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
 * [`gelarin init`](#gelarin-init)

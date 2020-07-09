@@ -19,11 +19,13 @@ export default class Use extends Command {
       required: false,
       description: 'specify boilerplate name to be used (optional)',
     },
+    {
+      name: 'clonePath',
+      required: false,
+      description: 'specify the directory this boilerplate should be cloned (Optional, default to ".")',
+    },
   ];
 
-  /**
-   * TODO: make "use" command accept directory name (default to $CWD/$REPO_NAME like "myfolder/javascript-boilerplate")
-   */
   async run() {
     /**
      * checking for gelarin.json first
@@ -64,14 +66,18 @@ export default class Use extends Command {
     if (args.name) {
       if (availableKeys.includes(args.name)) {
         const { repoLink } = parsed[args.name];
+        let clonePath = '';
+
+        if (args.clonePath) clonePath = args.clonePath;
 
         /**
          * exec git clone here
          */
-        exec(`git clone ${repoLink}`, (exc, out, err) => {
+        exec(`git clone ${repoLink} ${clonePath}`, (exc, out, err) => {
           if (exc) {
             this.error(err);
           }
+
           this.log(out);
           this.log(`finish cloning ${repoLink} !`);
         });
@@ -94,13 +100,20 @@ export default class Use extends Command {
               value: key,
             })),
           },
+          {
+            type: 'input',
+            name: 'where',
+            default: '.',
+            message: 'Where to put this boilerplate ?',
+
+          }
         ])
         .then(ans => {
           const { repoLink } = parsed[ans.name];
           /**
            * exec git clone here
            */
-          exec(`git clone ${repoLink}`, (exc, out, err) => {
+          exec(`git clone ${repoLink} ${ans.where}`, (exc, out, err) => {
             if (exc) {
               this.error(err);
             }
