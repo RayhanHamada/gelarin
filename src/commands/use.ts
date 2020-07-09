@@ -4,6 +4,7 @@ import path from 'path';
 import os from 'os';
 import inquirer from 'inquirer';
 import { exec } from 'child_process';
+import { checkForGelarin } from '../util';
 
 export default class Use extends Command {
   static description = 'Use a boilerplate repo';
@@ -18,6 +19,15 @@ export default class Use extends Command {
    * TODO: make "use" command accept directory name (default to $CWD/$REPO_NAME like "myfolder/javascript-boilerplate")
    */
   async run() {
+    /**
+     * checking for gelarin.json first
+     */
+    await checkForGelarin(this.log).then(exists => {
+      if (!exists) {
+        this.error('no repo found, please add one !');
+      }
+    });
+
     const { args } = this.parse(Use);
     const filePath = path.join(os.homedir(), 'gelarin.json');
 

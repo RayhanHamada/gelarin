@@ -5,6 +5,7 @@ import fs from 'fs';
 import { Command, flags } from '@oclif/command';
 import inquirer from 'inquirer';
 import prettier from 'prettier';
+import { checkForGelarin } from '../util';
 
 /**
  * TODO: add args for instant repo add
@@ -19,6 +20,10 @@ export default class New extends Command {
   static args = [];
 
   async run() {
+    /**
+     * check for gelarin.json first
+     */
+    await checkForGelarin(this.log);
     const filePath = path.join(os.homedir(), 'gelarin.json');
     const content = await fs.promises
       .readFile(filePath, { encoding: 'utf-8' })

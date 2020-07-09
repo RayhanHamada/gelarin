@@ -44,7 +44,6 @@ USAGE
 # Commands
 <!-- commands -->
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
-* [`gelarin init`](#gelarin-init)
 * [`gelarin new`](#gelarin-new)
 * [`gelarin rm [NAME]`](#gelarin-rm-name)
 * [`gelarin use [NAME]`](#gelarin-use-name)
@@ -65,20 +64,6 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src\commands\help.ts)_
-
-## `gelarin init`
-
-Create gelarin.json file in home directory for saving boilerplate
-
-```
-USAGE
-  $ gelarin init
-
-OPTIONS
-  -h, --help  show CLI help
-```
-
-_See code: [src\commands\init.ts](https://github.com/RayhanHamada/gelarin/blob/v0.0.0/src\commands\init.ts)_
 
 ## `gelarin new`
 

@@ -4,6 +4,7 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import inquirer from 'inquirer';
+import { checkForGelarin } from '../util';
 
 export default class Rm extends Command {
   static description = 'Remove saved boilerplate repo';
@@ -13,10 +14,18 @@ export default class Rm extends Command {
   };
 
   static args = [{ name: 'name' }];
-  
-  async run() {
-    const { args } = this.parse(Rm);
 
+  async run() {
+    /**
+     * checking for gelarin.json first
+     */
+    await checkForGelarin(this.log).then(exists => {
+      if (!exists) {
+        this.error('no repo found, please add one !');
+      }
+    });
+
+    const { args } = this.parse(Rm);
     const filePath = path.join(os.homedir(), 'gelarin.json');
 
     /**
