@@ -22,7 +22,7 @@ $ npm install -g gelarin
 $ gelarin COMMAND
 running command...
 $ gelarin (-v|--version|version)
-gelarin/0.2.0 win32-x64 node-v14.3.0
+gelarin/0.3.0 win32-x64 node-v14.3.0
 $ gelarin --help [COMMAND]
 USAGE
   $ gelarin COMMAND
@@ -44,7 +44,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
-* [`gelarin new`](#gelarin-new)
+* [`gelarin new [REPOLINK]`](#gelarin-new-repolink)
 * [`gelarin rm [NAME]`](#gelarin-rm-name)
 * [`gelarin use [NAME]`](#gelarin-use-name)
 
@@ -65,19 +65,19 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.1.0/src\commands\help.ts)_
 
-## `gelarin new`
+## `gelarin new [REPOLINK]`
 
 Add new boilerplate repo to be saved
 
 ```
 USAGE
-  $ gelarin new
+  $ gelarin new [REPOLINK]
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.2.0/src\commands\new.ts)_
+_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.3.0/src\commands\new.ts)_
 
 ## `gelarin rm [NAME]`
 
@@ -91,7 +91,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.2.0/src\commands\rm.ts)_
+_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.3.0/src\commands\rm.ts)_
 
 ## `gelarin use [NAME]`
 
@@ -105,7 +105,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.2.0/src\commands\use.ts)_
+_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.3.0/src\commands\use.ts)_
 <!-- commandsstop -->
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
 * [`gelarin init`](#gelarin-init)

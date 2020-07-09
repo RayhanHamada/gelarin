@@ -7,9 +7,6 @@ import inquirer from 'inquirer';
 import prettier from 'prettier';
 import { checkForGelarin } from '../util';
 
-/**
- * TODO: add args for instant repo add
- */
 export default class New extends Command {
   static description = 'Add new boilerplate repo to be saved';
 
@@ -17,13 +14,15 @@ export default class New extends Command {
     help: flags.help({ char: 'h' }),
   };
 
-  static args = [];
+  static args = [{ name: 'repoLink' }];
 
   async run() {
     /**
      * check for gelarin.json first
      */
     await checkForGelarin(this.log);
+
+    const { args } = this.parse(New);
     const filePath = path.join(os.homedir(), 'gelarin.json');
     const content = await fs.promises
       .readFile(filePath, { encoding: 'utf-8' })
@@ -32,6 +31,8 @@ export default class New extends Command {
       });
 
     let parsed: Record<string, any>;
+    let boilerplateName: string;
+    let repoLink: string;
 
     try {
       parsed = JSON.parse(content as string);
@@ -40,76 +41,108 @@ export default class New extends Command {
     }
 
     /**
-     * get all answer here
+     * save boilerplate if repoLink args is specified
      */
-    const answer = await inquirer
-      .prompt([
-        {
-          type: 'input',
-          name: 'boilerplateName',
-          message: 'Enter boilerplate name :',
-          validate: input => {
-            const allowed = /^([\w][\w\d]*(-[A-Za-z0-9]+)*)?$/;
+    if (args.repoLink) {
+      /**
+       * check if repoLink suffixed with .git.
+       * if not, add it to the back of the repoLink
+       */
+      const gitSuffix = /.+\.git$/;
+      const linkToSave = gitSuffix.test(args.repoLink)
+        ? args.repoLink
+        : `${args.repoLink}.git`;
 
-            if (input === '') {
-              this.log('\nBoilerplate name cannot be empty');
-              return false;
-            }
-
-            if (!allowed.test(input)) {
-              this.log(
-                '\nonly support alphanumeric with optional dash (like boil-er-plate2)'
-              );
-              return false;
-            }
-            return true;
-          },
+      parsed = {
+        ...parsed,
+        [linkToSave]: {
+          repoLink: linkToSave,
+          description: 'Your quicksaved boilerplate',
         },
-        {
-          type: 'input',
-          name: 'description',
-          message: 'Enter Description',
-          default: 'My Awesome Boilerplate : ',
-        },
-        {
-          type: 'input',
-          name: 'repoLink',
-          message: 'Enter Repository link : ',
-          validate: input => {
-            if (input === '') {
-              this.log('\nLink cannot be empty');
-              return false;
-            }
+      };
 
-            return true;
+      boilerplateName = args.repoLink;
+      repoLink = args.repoLink;
+    } else {
+      /**
+       * if repoLink args not specified, then show quickform
+       * to save a boilerplate
+       */
+      /**
+       * get all answer here
+       */
+      const answer = await inquirer
+        .prompt([
+          {
+            type: 'input',
+            name: 'boilerplateName',
+            message: 'Enter boilerplate name :',
+            validate: input => {
+              const allowed = /^([\w][\w\d]*(-[A-Za-z0-9]+)*)?$/;
+
+              if (input === '') {
+                this.log('\nBoilerplate name cannot be empty');
+                return false;
+              }
+
+              if (!allowed.test(input)) {
+                this.log(
+                  '\nonly support alphanumeric with optional dash (like boil-er-plate2)'
+                );
+                return false;
+              }
+              return true;
+            },
           },
-          transformer: input => {
-            /**
-             * check if repoLink suffixed with .git.
-             * if not, add it to the back of the repoLink
-             */
-            const gitSuffix = /.+\.git$/;
-
-            if (!gitSuffix.test(input)) return `${input}.git`;
-
-            return input;
+          {
+            type: 'input',
+            name: 'description',
+            message: 'Enter Description',
+            default: 'My Awesome Boilerplate : ',
           },
-        },
-      ])
-      .catch(() => {
-        this.error('Error when questioning');
-      });
+          {
+            type: 'input',
+            name: 'repoLink',
+            message: 'Enter Repository link : ',
+            validate: input => {
+              if (input === '') {
+                this.log('\nLink cannot be empty');
+                return false;
+              }
 
-    /**
-     * update parsed data
-     */
-    parsed = {
-      ...parsed,
-      [answer.boilerplateName]: {
-        description: answer.description,
-        repoLink: answer.repoLink,
-      },
-    };
+              return true;
+            },
+            transformer: input => {
+              /**
+               * check if repoLink suffixed with .git.
+               * if not, add it to the back of the repoLink
+               */
+              const gitSuffix = /.+\.git$/;
+
+              if (!gitSuffix.test(input)) return `${input}.git`;
+
+              return input;
+            },
+          },
+        ])
+        .catch(() => {
+          this.error('Error when questioning');
+        });
+
+      /**
+       * update parsed data
+       */
+      parsed = {
+        ...parsed,
+        [answer.boilerplateName]: {
+          repoLink: answer.repoLink,
+          description: answer.description,
+        },
+      };
+
+      boilerplateName = answer.boilerplateName;
+      repoLink = answer.repoLink;
+    }
 
     /**
      * prettify and write to gelarin.json
@@ -123,9 +156,7 @@ export default class New extends Command {
         }
       )
       .then(() => {
-        this.log(
-          `\n Repo ${answer.boilerplateName} (${answer.repoLink}) is saved !`
-        );
+        this.log(`\n Repo ${boilerplateName} (${repoLink}) is saved !`);
       });
   }
 }
