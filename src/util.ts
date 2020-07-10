@@ -24,3 +24,9 @@ export async function checkForGelarin(
 
   return exists;
 }
+
+export function properSpace(key: string, desc: string, longest: number) {
+  let space = '';
+  for (let i = 0; i < longest - key.length + 3; i++) space += ' ';
+  return `${key}${space}${desc}`;
+}

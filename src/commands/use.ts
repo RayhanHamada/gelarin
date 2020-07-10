@@ -4,7 +4,7 @@ import path from 'path';
 import os from 'os';
 import inquirer from 'inquirer';
 import { exec } from 'child_process';
-import { checkForGelarin } from '../util';
+import { checkForGelarin, properSpace } from '../util';
 
 export default class Use extends Command {
   static description = 'Use a boilerplate repo';
@@ -22,7 +22,8 @@ export default class Use extends Command {
     {
       name: 'clonePath',
       required: false,
-      description: 'specify the directory this boilerplate should be cloned (Optional, default to ".")',
+      description:
+        'specify the directory this boilerplate should be cloned (Optional, default to ".")',
     },
   ];
 
@@ -87,8 +88,16 @@ export default class Use extends Command {
     } else {
       /**
        * list all available boilerplates here
-       * TODO: also add repo description to the list.
        */
+
+      /**
+       * for proper spacing between boilerplate name and description
+       */
+      const longest = availableKeys.reduce(
+        (acc, curr) => (curr.length > acc ? curr.length : acc),
+        availableKeys[0].length
+      );
+
       await inquirer
         .prompt([
           {
@@ -96,7 +105,7 @@ export default class Use extends Command {
             name: 'name',
             message: 'Available boilerplate',
             choices: availableKeys.map(key => ({
-              name: key,
+              name: properSpace(key, parsed[key].description, longest),
               value: key,
             })),
           },
@@ -105,8 +114,7 @@ export default class Use extends Command {
             name: 'where',
             default: '.',
             message: 'Where to put this boilerplate ?',
-
-          }
+          },
         ])
         .then(ans => {
           const { repoLink } = parsed[ans.name];
@@ -117,6 +125,7 @@ export default class Use extends Command {
             if (exc) {
               this.error(err);
             }
+
             this.log(out);
             this.log(`finish cloning ${repoLink} !`);
           });
