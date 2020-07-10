@@ -6,6 +6,9 @@ import inquirer from 'inquirer';
 import { exec } from 'child_process';
 import { checkForGelarin, properSpace } from '../util';
 
+/**
+ * @description Use a boilerplate repo saved on your gelarin.json
+ */
 export default class Use extends Command {
   static description = 'Use a boilerplate repo';
 
@@ -23,7 +26,7 @@ export default class Use extends Command {
       name: 'clonePath',
       required: false,
       description:
-        'specify the directory this boilerplate should be cloned (Optional, default to ".")',
+        'specify the directory this boilerplate should be cloned (Optional, default to "." or current directory)',
     },
   ];
 

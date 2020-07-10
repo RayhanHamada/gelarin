@@ -84,7 +84,7 @@ _See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0
 
 ## `gelarin rm [NAME]`
 
-Remove saved boilerplate repo (Optional)
+Remove saved boilerplate repo
 
 ```
 USAGE
@@ -109,7 +109,7 @@ USAGE
 
 ARGUMENTS
   NAME       specify boilerplate name to be used (optional)
-  CLONEPATH  specify the directory this boilerplate should be cloned (Optional, default to ".")
+  CLONEPATH  specify the directory this boilerplate should be cloned (Optional, default to "." or current directory)
 
 OPTIONS
   -h, --help  show CLI help

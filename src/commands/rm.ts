@@ -6,8 +6,11 @@ import fs from 'fs';
 import inquirer from 'inquirer';
 import { checkForGelarin } from '../util';
 
+/**
+ * @description Remove saved boilerplate repository
+ */
 export default class Rm extends Command {
-  static description = 'Remove saved boilerplate repo (Optional)';
+  static description = 'Remove saved boilerplate repo';
 
   static flags = {
     help: flags.help({ char: 'h' }),

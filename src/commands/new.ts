@@ -7,6 +7,9 @@ import inquirer from 'inquirer';
 import prettier from 'prettier';
 import { checkForGelarin } from '../util';
 
+/**
+ * @description Add new boilerplate repository to be saved
+ */
 export default class New extends Command {
   static description = 'Add new boilerplate repo to be saved';
 
