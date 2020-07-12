@@ -17,11 +17,18 @@ export default class New extends Command {
     help: flags.help({ char: 'h' }),
   };
 
-  static args = [
+  static args: any = [
     {
       name: 'repoLink',
       required: false,
-      description: 'specify boilerplate repo link (optional)',
+      description: 'Specify boilerplate repo link (optional)',
+    },
+    {
+      name: 'description',
+      required: false,
+      description:
+        'Specify boilerplate repo brief description, should be in double quote("") (Optional)',
+      default: 'My awesome quicksaved boilerplate',
     },
   ];
 
@@ -62,12 +69,9 @@ export default class New extends Command {
         ? args.repoLink
         : `${args.repoLink}.git`;
 
-      parsed = {
-        ...parsed,
-        [linkToSave]: {
-          repoLink: linkToSave,
-          description: 'Your quicksaved boilerplate',
-        },
+      parsed[linkToSave] = {
+        repoLink: linkToSave,
+        description: args.description,
       };
 
       boilerplateName = args.repoLink;
@@ -141,12 +145,9 @@ export default class New extends Command {
       /**
        * update parsed data
        */
-      parsed = {
-        ...parsed,
-        [answer.boilerplateName]: {
-          repoLink: answer.repoLink,
-          description: answer.description,
-        },
+      parsed[answer.boilerplateName] = {
+        repoLink: answer.repoLink,
+        description: answer.description,
       };
 
       boilerplateName = answer.boilerplateName;
