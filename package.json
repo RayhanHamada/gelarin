@@ -1,7 +1,7 @@
 {
   "name": "gelarin",
   "description": "A package for saving boilerplates repo",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "author": "RayhanHamada @RayhanHamada",
   "bin": {
     "gelarin": "./bin/run"

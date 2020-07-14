@@ -1,4 +1,8 @@
 
+# gelarin
+=========
+A package for saving and generate your boilerplate !
+
 # Usage
 <!-- usage -->
 ```sh-session
@@ -6,7 +10,7 @@ $ npm install -g gelarin
 $ gelarin COMMAND
 running command...
 $ gelarin (-v|--version|version)
-gelarin/0.7.1 win32-x64 node-v14.3.0
+gelarin/0.7.2 win32-x64 node-v14.3.0
 $ gelarin --help [COMMAND]
 USAGE
   $ gelarin COMMAND
@@ -55,7 +59,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.1/src\commands\new.ts)_
+_See code: [src\commands\new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.2/src\commands\new.ts)_
 
 ## `gelarin rm [NAME]`
 
@@ -72,7 +76,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.1/src\commands\rm.ts)_
+_See code: [src\commands\rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.2/src\commands\rm.ts)_
 
 ## `gelarin use [NAME] [CLONEPATH]`
 
@@ -90,5 +94,5 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.1/src\commands\use.ts)_
+_See code: [src\commands\use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.2/src\commands\use.ts)_
 <!-- commandsstop -->
