@@ -11,7 +11,7 @@ $ npm install -g gelarin
 $ gelarin COMMAND
 running command...
 $ gelarin (-v|--version|version)
-gelarin/0.7.3 linux-x64 node-v14.15.1
+gelarin/0.7.4 linux-x64 node-v14.15.1
 $ gelarin --help [COMMAND]
 USAGE
   $ gelarin COMMAND
@@ -58,7 +58,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.3/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.4/src/commands/new.ts)_
 
 ## `gelarin rm [NAME]`
 
@@ -73,7 +73,7 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.3/src/commands/rm.ts)_
+_See code: [src/commands/rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.4/src/commands/rm.ts)_
 
 ## `gelarin use [NAME] [CLONEPATH]`
 
@@ -89,5 +89,5 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.3/src/commands/use.ts)_
+_See code: [src/commands/use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.4/src/commands/use.ts)_
 <!-- commandsstop -->
