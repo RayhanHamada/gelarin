@@ -1,4 +1,4 @@
-# gelarin
+# gelarin ![Node.js Package](https://github.com/RayhanHamada/gelarin/workflows/Node.js%20Package/badge.svg)
 
 =========
 A package for saving and generate your boilerplate !
