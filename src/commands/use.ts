@@ -16,19 +16,7 @@ export default class Use extends Command {
     help: flags.help({ char: 'h' }),
   };
 
-  static args = [
-    {
-      name: 'name',
-      required: false,
-      description: 'specify boilerplate name to be used (optional)',
-    },
-    {
-      name: 'clonePath',
-      required: false,
-      description:
-        'specify the directory this boilerplate should be cloned (Optional, default to "." or current directory)',
-    },
-  ];
+  static args = [];
 
   async run() {
     /**
@@ -40,7 +28,6 @@ export default class Use extends Command {
       }
     });
 
-    const { args } = this.parse(Use);
     const filePath = path.join(os.homedir(), 'gelarin.json');
 
     /**
@@ -64,20 +51,41 @@ export default class Use extends Command {
     }
 
     /**
-     * see if the args.projectName for use is specified,
-     * if not then get list of choices
+     * list all available boilerplates here
      */
-    if (args.name) {
-      if (availableKeys.includes(args.name)) {
-        const { repoLink } = parsed[args.name];
-        let clonePath = '';
 
-        if (args.clonePath) clonePath = args.clonePath;
+    /**
+     * for proper spacing between boilerplate name and description
+     */
+    const longest = availableKeys.reduce(
+      (acc, curr) => (curr.length > acc ? curr.length : acc),
+      availableKeys[0].length
+    );
 
+    await inquirer
+      .prompt([
+        {
+          type: 'list',
+          name: 'name',
+          message: 'Available boilerplate',
+          choices: availableKeys.map(key => ({
+            name: properSpace(key, parsed[key].description, longest),
+            value: key,
+          })),
+        },
+        {
+          type: 'input',
+          name: 'where',
+          default: '.',
+          message: 'Where to put this boilerplate ?',
+        },
+      ])
+      .then(ans => {
+        const { repoLink } = parsed[ans.name];
         /**
          * exec git clone here
          */
-        exec(`git clone ${repoLink} ${clonePath}`, (exc, out, err) => {
+        exec(`git clone ${repoLink} ${ans.where}`, (exc, out, err) => {
           if (exc) {
             this.error(err);
           }
@@ -85,54 +93,6 @@ export default class Use extends Command {
           this.log(out);
           this.log(`finish cloning ${repoLink} !`);
         });
-      } else {
-        this.error(`Key ${args.name} not found`);
-      }
-    } else {
-      /**
-       * list all available boilerplates here
-       */
-
-      /**
-       * for proper spacing between boilerplate name and description
-       */
-      const longest = availableKeys.reduce(
-        (acc, curr) => (curr.length > acc ? curr.length : acc),
-        availableKeys[0].length
-      );
-
-      await inquirer
-        .prompt([
-          {
-            type: 'list',
-            name: 'name',
-            message: 'Available boilerplate',
-            choices: availableKeys.map(key => ({
-              name: properSpace(key, parsed[key].description, longest),
-              value: key,
-            })),
-          },
-          {
-            type: 'input',
-            name: 'where',
-            default: '.',
-            message: 'Where to put this boilerplate ?',
-          },
-        ])
-        .then(ans => {
-          const { repoLink } = parsed[ans.name];
-          /**
-           * exec git clone here
-           */
-          exec(`git clone ${repoLink} ${ans.where}`, (exc, out, err) => {
-            if (exc) {
-              this.error(err);
-            }
-
-            this.log(out);
-            this.log(`finish cloning ${repoLink} !`);
-          });
-        });
-    }
+      });
   }
 }

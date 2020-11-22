@@ -15,6 +15,12 @@ export default class New extends Command {
 
   static flags = {
     help: flags.help({ char: 'h' }),
+    interactive: flags.boolean({
+      char: 'i',
+      default: false,
+      description:
+        'To launch interactive input mode (You will likely to do this)',
+    }),
   };
 
   static args: any = [
@@ -38,7 +44,7 @@ export default class New extends Command {
      */
     await checkForGelarin(this.log);
 
-    const { args } = this.parse(New);
+    const { args, flags } = this.parse(New);
     const filePath = path.join(os.homedir(), 'gelarin.json');
     const content = await fs.promises
       .readFile(filePath, { encoding: 'utf-8' })
@@ -56,27 +62,7 @@ export default class New extends Command {
       this.error(`failed parsing gelarin.json`);
     }
 
-    /**
-     * save boilerplate if repoLink args is specified
-     */
-    if (args.repoLink) {
-      /**
-       * check if repoLink suffixed with .git.
-       * if not, add it to the back of the repoLink
-       */
-      const gitSuffix = /.+\.git$/;
-      const linkToSave = gitSuffix.test(args.repoLink)
-        ? args.repoLink
-        : `${args.repoLink}.git`;
-
-      parsed[linkToSave] = {
-        repoLink: linkToSave,
-        description: args.description,
-      };
-
-      boilerplateName = args.repoLink;
-      repoLink = args.repoLink;
-    } else {
+    if (flags.interactive) {
       /**
        * if repoLink args not specified, then show quickform
        * to save a boilerplate
@@ -152,6 +138,26 @@ export default class New extends Command {
 
       boilerplateName = answer.boilerplateName;
       repoLink = answer.repoLink;
+    } else {
+      /**
+       * check if repoLink suffixed with .git.
+       * if not, add it to the back of the repoLink
+       */
+      if (!args.repoLink) {
+        this.error('Repolink is not specified !');
+      }
+      const gitSuffix = /.+\.git$/;
+      const linkToSave = gitSuffix.test(args.repoLink)
+        ? args.repoLink
+        : `${args.repoLink}.git`;
+
+      parsed[linkToSave] = {
+        repoLink: linkToSave,
+        description: args.description,
+      };
+
+      boilerplateName = args.repoLink;
+      repoLink = args.repoLink;
     }
 
     /**

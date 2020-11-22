@@ -1,7 +1,6 @@
 # gelarin ![Node.js Package](https://github.com/RayhanHamada/gelarin/workflows/Node.js%20Package/badge.svg)
 
-=========
-A package for saving and generate your boilerplate !
+========= A package for saving and generate your boilerplate ! ==========
 
 # Usage
 
@@ -11,7 +10,7 @@ $ npm install -g gelarin
 $ gelarin COMMAND
 running command...
 $ gelarin (-v|--version|version)
-gelarin/0.7.4 linux-x64 node-v14.15.1
+gelarin/0.8.0 linux-x64 node-v14.15.1
 $ gelarin --help [COMMAND]
 USAGE
   $ gelarin COMMAND
@@ -24,8 +23,8 @@ USAGE
 <!-- commands -->
 * [`gelarin help [COMMAND]`](#gelarin-help-command)
 * [`gelarin new [REPOLINK] [DESCRIPTION]`](#gelarin-new-repolink-description)
-* [`gelarin rm [NAME]`](#gelarin-rm-name)
-* [`gelarin use [NAME] [CLONEPATH]`](#gelarin-use-name-clonepath)
+* [`gelarin rm`](#gelarin-rm)
+* [`gelarin use`](#gelarin-use)
 
 ## `gelarin help [COMMAND]`
 
@@ -55,39 +54,33 @@ ARGUMENTS
                double quote("") (Optional)
 
 OPTIONS
-  -h, --help  show CLI help
+  -h, --help         show CLI help
+  -i, --interactive  To launch interactive input mode (You will likely to do this)
 ```
 
-_See code: [src/commands/new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.4/src/commands/new.ts)_
+_See code: [src/commands/new.ts](https://github.com/RayhanHamada/gelarin/blob/v0.8.0/src/commands/new.ts)_
 
-## `gelarin rm [NAME]`
+## `gelarin rm`
 
 ```
 USAGE
-  $ gelarin rm [NAME]
-
-ARGUMENTS
-  NAME  specify boilerplate name to be removed (optional)
+  $ gelarin rm
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.4/src/commands/rm.ts)_
+_See code: [src/commands/rm.ts](https://github.com/RayhanHamada/gelarin/blob/v0.8.0/src/commands/rm.ts)_
 
-## `gelarin use [NAME] [CLONEPATH]`
+## `gelarin use`
 
 ```
 USAGE
-  $ gelarin use [NAME] [CLONEPATH]
-
-ARGUMENTS
-  NAME       specify boilerplate name to be used (optional)
-  CLONEPATH  specify the directory this boilerplate should be cloned (Optional, default to "." or current directory)
+  $ gelarin use
 
 OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.7.4/src/commands/use.ts)_
+_See code: [src/commands/use.ts](https://github.com/RayhanHamada/gelarin/blob/v0.8.0/src/commands/use.ts)_
 <!-- commandsstop -->

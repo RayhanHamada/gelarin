@@ -16,13 +16,7 @@ export default class Rm extends Command {
     help: flags.help({ char: 'h' }),
   };
 
-  static args = [
-    {
-      name: 'name',
-      required: false,
-      description: 'specify boilerplate name to be removed (optional)',
-    },
-  ];
+  static args = [];
 
   async run() {
     /**
@@ -34,7 +28,6 @@ export default class Rm extends Command {
       }
     });
 
-    const { args } = this.parse(Rm);
     const filePath = path.join(os.homedir(), 'gelarin.json');
 
     /**
@@ -68,51 +61,41 @@ export default class Rm extends Command {
      * if the name of the boilerplate meant to be removed is specified as inline argument
      */
     const toRemove: string[] = [];
-    if (args.name) {
-      /**
-       * check if args.name is exists
-       */
-      if (availableKeys.includes(args.name)) {
-        toRemove.push(args.name);
-      } else {
-        this.error(`${args.name} is not exists`);
-      }
-    } else {
-      /**
-       * if the name of the boilerplate isn't specified
-       */
-      await inquirer
-        .prompt([
-          {
-            type: 'checkbox',
-            name: 'names',
-            message: 'Available boilerplate to be deleted',
-            choices: availableKeys.map(key => ({
-              name: key,
-              value: key,
-            })),
-          },
-        ])
-        .then(ans => {
-          toRemove.push(...ans.names);
-          toRemove.forEach(key => {
-            parsed[key] = undefined;
-          });
-        });
 
-      await fs.promises
-        .writeFile(
-          filePath,
-          format(JSON.stringify(parsed), { parser: 'json-stringify' })
-        )
-        .then(() => {
-          toRemove.forEach(key => {
-            this.log(`${key} successfully deleted !`);
-          });
-        })
-        .catch(() => {
-          this.error(`failed deleting boilerplate !`);
+    /**
+     * if the name of the boilerplate isn't specified
+     */
+    await inquirer
+      .prompt([
+        {
+          type: 'checkbox',
+          name: 'names',
+          message: 'Available boilerplate to be deleted',
+          choices: availableKeys.map(key => ({
+            name: key,
+            value: key,
+          })),
+        },
+      ])
+      .then(ans => {
+        toRemove.push(...ans.names);
+        toRemove.forEach(key => {
+          parsed[key] = undefined;
         });
-    }
+      });
+
+    await fs.promises
+      .writeFile(
+        filePath,
+        format(JSON.stringify(parsed), { parser: 'json-stringify' })
+      )
+      .then(() => {
+        toRemove.forEach(key => {
+          this.log(`${key} successfully deleted !`);
+        });
+      })
+      .catch(() => {
+        this.error(`failed deleting boilerplate !`);
+      });
   }
 }
